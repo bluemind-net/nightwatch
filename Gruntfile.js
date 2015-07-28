@@ -91,6 +91,15 @@ module.exports = function(grunt) {
           silent: true
         }
       }
+    },
+    jsdoc : {
+        dist : {
+            src: ['lib/**/*.js'],
+            options: {
+                configure: 'conf.json',
+                destination: 'docs'
+            }
+        }
     }
 
   });
@@ -98,11 +107,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-npm-release');
   grunt.loadNpmTasks('grunt-jsonlint');
   grunt.loadNpmTasks('grunt-complexity');
+  grunt.loadNpmTasks('grunt-jsdoc');
 
   // load the plugin that provides the "jshint" task.
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Default task(s).
+  grunt.registerTask('doc', ['jsdoc']);
   grunt.registerTask('release', ['npmrelease']);
   grunt.registerTask('default', ['jshint', 'jsonlint']);
   grunt.registerTask('all', ['jshint', 'jsonlint', 'complexity']);
